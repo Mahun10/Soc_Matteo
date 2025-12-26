@@ -1,67 +1,71 @@
 
-# SOC Infrastructure Implementation: Wazuh, Indexer, and Logstash
+---
+
+# SOC Infrastructure Implementation: Wazuh, Indexer, and Logstash Pipeline
 
 ## Project Overview
 
-This project documents the deployment of a centralized Security Operations Center (SOC) infrastructure. It features a distributed SIEM (Security Information and Event Management) and XDR (Extended Detection and Response) architecture.
+This project documents the deployment of a centralized Security Operations Center (SOC) infrastructure. The architecture utilizes a distributed SIEM/XDR model where log collection, processing, and indexing are decoupled to ensure modularity and scalability.
 
-The solution is built on the Wazuh ecosystem, integrated with Logstash for log processing and Wazuh Indexer for data storage. The primary objective is to establish a robust security monitoring environment capable of real-time threat detection, log analysis, and vulnerability assessment across a hybrid network.
+The solution integrates the Wazuh Manager with a Logstash pipeline for data transformation, using OpenSearch (via Wazuh Indexer) as the primary data store.
 
 ## System Architecture
 
-The infrastructure is designed as a modular data pipeline to ensure scalability and efficient log management.
+The infrastructure is built as a multi-stage data pipeline designed for real-time telemetry analysis.
 
-### Data Flow Pipeline
+### Data Flow and Components
 
-1. **Endpoint (Windows VM)**: The Wazuh Agent collects system logs, file integrity data, and security events.
-2. **Processing (Debian VM)**: The Wazuh Manager analyzes incoming telemetry against pre-defined decoders and rules.
-3. **Transformation (Logstash)**: Acts as the ETL (Extract, Transform, Load) layer to normalize data before storage.
-4. **Indexing (Wazuh Indexer)**: A search and analytics engine that stores, indexes, and organizes security alerts.
-5. **Visualization (Wazuh Dashboard)**: The central web interface for security monitoring and incident response.
+1. **Endpoint (Windows VM)**: The Wazuh Agent collects security events and system telemetry.
+2. **Wazuh Manager (Debian)**: Receives and analyzes events. It generates alerts based on rule matching and decoders.
+3. **Logstash Pipeline**: Acts as the bridge between the Manager and the Indexer. It receives alerts via filebeat or syslog, processes them, and pushes them to the OpenSearch API.
+4. **Wazuh Indexer (OpenSearch)**: Manages data indexing and storage. It receives alert data from Logstash and metadata directly from the management services.
+5. **Wazuh Dashboard**: A web interface connected to OpenSearch using dedicated credentials. It allows for visualization of security alerts and agent management.
 
 ### Technology Stack
 
-| Component | Technology | Role |
-| --- | --- | --- |
-| SIEM / XDR | Wazuh Manager | Threat detection and centralized management |
-| Indexer | Wazuh Indexer | Data indexing and storage (OpenSearch-based) |
-| Log Pipeline | Logstash | Data transformation and routing |
-| Visualization | Wazuh Dashboard | Web UI for analytics and monitoring |
-| Server OS | Debian 12 | Hosting the management stack |
-| Endpoint OS | Windows Server 2022 | Monitored target via Wazuh Agent |
+| Component | Technology | Role | Port | Protocol |
+| --- | --- | --- | --- | --- |
+| **SIEM Engine** | Wazuh Manager | Threat detection and rule engine | 1514/1515 | TCP |
+| **Data Transport** | Logstash | ETL: Routing logs to OpenSearch | - | - |
+| **Search Engine** | OpenSearch | Data indexing and storage | 9200 | TCP |
+| **Visualization** | Wazuh Dashboard | Web UI for analytics | 5601 | HTTP |
+| **Server OS** | Debian 12 | Hosting the management stack | - | - |
+| **Endpoint OS** | Windows Server 2022 | Monitored target | - | - |
 
 ---
 
 ## Implementation Details
 
-### Server Deployment (Debian)
+### Server Configuration (Debian)
 
-The management stack was installed on a Debian environment. The configuration focuses on the seamless integration between the Manager, Logstash, and the Indexer.
+The management stack ensures seamless communication between the detection engine and the storage layer.
 
-* **Service Management**: All core services (wazuh-manager, wazuh-indexer, logstash, wazuh-dashboard) were configured to start on boot.
-* **Network Hardening**: The Debian host was configured to allow inbound traffic on essential ports:
-* Port 1514 (TCP): Agent communication.
-* Port 1515 (TCP): Agent registration.
-* Port 443 (HTTPS): Dashboard access.
+* **Logstash Integration**: Configured with a dedicated pipeline (`01-wazuh.conf`) to ingest Wazuh alerts and output them to the OpenSearch cluster.
+* **Storage Layer**: Wazuh Indexer (OpenSearch) is configured to index security alerts and maintain agent status information.
+* **Dashboard Access**: The dashboard is configured to communicate with the Indexer via internal credentials defined in the configuration files. It is accessible on port **5601** over **HTTP**.
 
+### Network Hardening
 
+The following ports were opened on the Debian host to ensure connectivity:
 
-### Endpoint Configuration (Windows)
+* **1514/TCP**: Agent communication (Events).
+* **1515/TCP**: Agent registration.
+* **5601/TCP**: Dashboard web access.
+* **9200/TCP**: OpenSearch REST API (Restricted to internal traffic).
 
-The monitoring of the Windows VM was achieved through the deployment of the Wazuh Agent.
+### Endpoint Monitoring (Windows)
 
-* **Connectivity**: The agent was pointed to the Manager's static IP address via the `ossec.conf` configuration file.
-* **Network Validation**: Verified that both VMs reside on the same subnet to ensure low-latency communication.
-* **Monitoring Scope**: Configured to monitor Windows Event Logs (System, Security, Application) and File Integrity Monitoring (FIM).
+* **Agent Deployment**: Installed on Windows 10/11, pointing to the Debian Manager's static IP.
+* **Monitoring Scope**: Real-time tracking of Windows Event Logs (System, Security, Application) and File Integrity Monitoring (FIM) for critical system directories.
 
 ---
 
 ## Key SOC Features Demonstrated
 
-* **Real-time Threat Detection**: Immediate alerts for suspicious activities such as brute-force attacks or unauthorized access.
+* **Automated Log Pipeline**: Implementation of a Manager -> Logstash -> OpenSearch flow for optimized data handling.
 * **Vulnerability Management**: Automated detection of known CVEs and outdated software on the Windows endpoint.
-* **Log Pipeline Management**: Demonstrated proficiency in using Logstash to bridge the management engine and the indexing layer.
 * **File Integrity Monitoring**: Tracking unauthorized changes to critical system files and registry keys.
+* **Centralized Incident Response**: Capability to query indexed security events and visualize attack patterns through the dashboard.
 
 ---
 
@@ -70,27 +74,21 @@ The monitoring of the Windows VM was achieved through the deployment of the Wazu
 ```plaintext
 .
 ├── configs/
-│   ├── wazuh_manager/      # Sanitized ossec.conf for the manager
-│   ├── wazuh_agent/        # Windows agent configuration snippets
-│   └── logstash/           # Logstash pipeline (01-wazuh.conf)
+│   ├── wazuh_manager/      # Wazuh Manager settings (ossec.conf)
+│   ├── logstash/           # Logstash pipeline (01-wazuh.conf)
+│   ├── wazuh_indexer/      # Indexer/OpenSearch communication settings
+│   └── wazuh_dashboard/    # Dashboard connection & credentials config
 ├── docs/
-│   └── report_soc.pdf      # Detailed technical report in LaTeX format
+│   └── report_soc.pdf      # Technical documentation in LaTeX format
 ├── images/                 # Architecture diagrams and dashboard captures
 └── README.md               # Project documentation
 
 ```
 
-## Technical Documentation
-
-A detailed technical report including step-by-step installation, troubleshooting procedures, and configuration logic is available in the documentation folder.
-
-**[View the Full Technical Report (PDF)](https://www.google.com/search?q=docs/report_soc.pdf)**
-
----
-
 ## Author
 
-**Matteo PADONOU** Cybersecurity and SOC Engineering Project
+**Matteo PADONOU**
+Cybersecurity and SOC Engineering Project
 
 ---
 
