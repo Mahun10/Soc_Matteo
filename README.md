@@ -27,8 +27,8 @@ The infrastructure is designed as a modular data pipeline to ensure scalability 
 | Indexer | Wazuh Indexer | Data indexing and storage (OpenSearch-based) |
 | Log Pipeline | Logstash | Data transformation and routing |
 | Visualization | Wazuh Dashboard | Web UI for analytics and monitoring |
-| Server OS | Debian GNU/Linux | Hosting the management stack |
-| Endpoint OS | Windows 10/11 | Monitored target via Wazuh Agent |
+| Server OS | Debian 12 GNU/Linux | Hosting the management stack |
+| Endpoint OS | Windows Server 2022 | Monitored target via Wazuh Agent |
 
 ---
 
