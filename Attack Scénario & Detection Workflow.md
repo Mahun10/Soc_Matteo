@@ -57,6 +57,9 @@ A successful Remote Desktop (RDP) connection was established from the Kali machi
 
 The use of NTLM for RDP access on an administrator account represents a high-risk behavior.
 
+![Privilege Escalation Detection](screen/AlertRDP.png)
+
+
 ---
 
 ## 4. Post-Compromise Activity – Privilege Escalation
