@@ -97,7 +97,9 @@ Encoded PowerShell commands were executed on the compromised system.
 * Custom rule matching encoded PowerShell execution
 * Typical post-exploitation behavior
 
+
 ---
+![Command Powershell Detection](screen/DetectionPowershellCommand.png)
 
 ## Result and Analysis
 
