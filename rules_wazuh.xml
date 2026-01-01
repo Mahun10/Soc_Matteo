@@ -1,0 +1,50 @@
+<!-- Local rules -->
+
+<!-- Modify it at your will. -->
+<!-- Copyright (C) 2015, Wazuh Inc. -->
+
+<!-- Example -->
+
+<group name="local,windows,">
+
+  <!-- 1) Brute force: 5 échecs de connexion (4625) en 5 minutes -->
+  <rule id="110001" level="10" frequency="5" timeframe="300">
+    <if_matched_sid>60122</if_matched_sid>
+    <description>Brute force : 5 échecs de connexion en 5 minutes</description>
+    <group>authentication_failed,windows,bruteforce,</group>
+  </rule>
+
+  <!-- 2) Succès après brute force (4624 après 4625 multiples) -->
+  <rule id="110002" level="12">
+    <if_matched_sid>110001</if_matched_sid>
+    <if_sid>60106</if_sid>
+    <same_srcip />
+    <description>Connexion réussie après brute force (même IP)</description>
+    <group>authentication_success,windows,possible_compromise,</group>
+  </rule>
+
+  <!-- 3) Ajout au groupe Administrateurs -->
+  <rule id="110003" level="13">
+    <if_sid>60130</if_sid>
+    <description>Ajout d’un utilisateur au groupe Administrateurs</description>
+    <group>privilege_escalation,windows,</group>
+  </rule>
+
+  <!-- 4) PowerShell suspect : commande encodée -->
+  <rule id="110004" level="12">
+    <if_sid>61603</if_sid>
+    <field name="win.eventdata.CommandLine">-enc|-encodedcommand</field>
+    <description>PowerShell suspect : commande encodée</description>
+    <group>powershell,windows,suspicious_command,</group>
+  </rule>
+
+  <!-- 5) RDP : LogonType 10 (sans filtre horaire ici) -->
+  <rule id="110005" level="8">
+    <if_sid>60106</if_sid>
+    <field name="win.eventdata.LogonType">10</field>
+    <description>Connexion RDP détectée (LogonType 10)</description>
+    <group>rdp,windows,</group>
+  </rule>
+
+</group>
+
