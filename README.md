@@ -30,7 +30,7 @@ The infrastructure is built as a multi-stage data pipeline designed for real-tim
 | Search Engine    | OpenSearch       | Data indexing and storage             | 9200        | HTTPS    |
 | Visualization    | Wazuh Dashboard  | Web UI for analytics                  | 5601        | HTTP     |
 | Server OS        | Debian 12        | Hosting the management stack          | -           | -        |
-| Endpoint OS      | Windows Server 2022 | Monitored target                  | -           | -        |
+| Endpoint OS      | Windows Server 2022 | Monitored target with Wazuh-Agent                | -           | -        |
 
 ---
 
@@ -48,10 +48,12 @@ The management stack ensures seamless communication between the detection engine
 
 The following ports were opened on the Debian host to ensure connectivity:
 
-* **1514/TCP**: Agent communication (Events).
-* **1515/TCP**: Agent registration.
-* **5601/TCP**: Dashboard web access.
-* **9200/TCP**: OpenSearch REST API (Restricted to internal traffic).
+- 1514/TCP: Wazuh agent communication (event transmission).
+- 1515/TCP: Agent registration (required only during enrollment).
+- 5601/TCP: Wazuh Dashboard web access.
+- 9200/TCP: OpenSearch REST API (restricted to internal traffic).
+
+All other ports remain closed to minimize the attack surface.
 
 ### Endpoint Monitoring (Windows)
 
