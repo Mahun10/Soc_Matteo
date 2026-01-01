@@ -76,7 +76,7 @@ The following ports were opened on the Debian host to ensure connectivity:
 ├── configs/
 │   ├── wazuh_manager/      # Wazuh Manager settings (ossec.conf)
 │   ├── logstash/           # Logstash pipeline (01-wazuh.conf)
-│   ├── wazuh_indexer/      # Indexer/OpenSearch communication settings
+│   ├── opensearch/         # OpenSearch communication settings
 │   └── wazuh_dashboard/    # Dashboard connection & credentials config
 ├── docs/
 │   └── report_soc.pdf      # Technical documentation in LaTeX format
