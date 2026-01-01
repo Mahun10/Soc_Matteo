@@ -23,14 +23,14 @@ The infrastructure is built as a multi-stage data pipeline designed for real-tim
 
 ### Technology Stack
 
-| Component | Technology | Role | Port | Protocol |
-| --- | --- | --- | --- | --- |
-| **SIEM Engine** | Wazuh Manager | Threat detection and rule engine | 1514/1515 | TCP |
-| **Data Transport** | Logstash | ETL: Routing logs to OpenSearch | - | TLS |
-| **Search Engine** | OpenSearch | Data indexing and storage | 9200 | HTTPS |
-| **Visualization** | Wazuh Dashboard | Web UI for analytics | 5601 | HTTP |
-| **Server OS** | Debian 12 | Hosting the management stack | - | - |
-| **Endpoint OS** | Windows Server 2022 | Monitored target | - | - |
+| Component        | Technology       | Role                                  | Port        | Protocol |
+|------------------|------------------|---------------------------------------|-------------|----------|
+| SIEM Engine      | Wazuh Manager    | Threat detection and rule engine      | 1514 / 1515 | TCP      |
+| Data Pipeline    | Logstash         | Alert processing and forwarding       | Local       | File / HTTPS |
+| Search Engine    | OpenSearch       | Data indexing and storage             | 9200        | HTTPS    |
+| Visualization    | Wazuh Dashboard  | Web UI for analytics                  | 5601        | HTTP     |
+| Server OS        | Debian 12        | Hosting the management stack          | -           | -        |
+| Endpoint OS      | Windows Server 2022 | Monitored target                  | -           | -        |
 
 ---
 
