@@ -109,6 +109,9 @@ This demonstrates the SIEM’s ability to correlate raw events into meaningful s
 ## 3. Successful RDP Connection (Lateral Movement)
 
 A successful Remote Desktop (RDP) connection was established from the Kali machine using an administrator account.
+```linux
+xfreerdp3 /v:<WINDOWS_TARGET_IP> /u:<USERNAME> /p:<PASSWORD> /cert:ignore
+```
 
 **Indicators:**
 - LogonType: `10` (Remote Interactive)  
