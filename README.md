@@ -13,24 +13,17 @@ The solution integrates the Wazuh Manager with a Logstash pipeline for data tran
 
 The infrastructure is built as a multi-stage data pipeline designed for real-time telemetry analysis.
 
-### Data Flow and Components
-
-1. **Endpoint (Windows VM)**: The Wazuh Agent collects security events and system telemetry.
-2. **Wazuh Manager (Debian)**: Receives and analyzes events. It generates alerts based on rule matching and decoders.
-3. **Logstash Pipeline**: Acts as the bridge between the Manager and the Indexer. It receives alerts via filebeat or syslog, processes them, and pushes them to the OpenSearch API.
-4. **OpenSearch**: Manages data indexing and storage. It receives alert data from Logstash and metadata directly from the management services.
-5. **Wazuh Dashboard**: A web interface connected to OpenSearch using dedicated credentials. It allows for visualization of security alerts and agent management.
-
 ### Technology Stack
 
 | Component        | Technology       | Role                                  | Port        | Protocol |
 |------------------|------------------|---------------------------------------|-------------|----------|
+| Endpoint Agent   | Wazuh Agent      | Collects endpoint telemetry and logs  | Outbound to 1514/1515 | TCP |
 | SIEM Engine      | Wazuh Manager    | Threat detection and rule engine      | 1514 / 1515 | TCP      |
-| Data Pipeline    | Logstash         | Alert processing and forwarding       | Local       | File / HTTPS |
+| Data Pipeline    | Logstash         | Alert processing and forwarding       | Local       | -        |
 | Search Engine    | OpenSearch       | Data indexing and storage             | 9200        | HTTPS    |
 | Visualization    | Wazuh Dashboard  | Web UI for analytics                  | 5601        | HTTP     |
 | Server OS        | Debian 12        | Hosting the management stack          | -           | -        |
-| Endpoint OS      | Windows Server 2022 | Monitored target with Wazuh-Agent                | -           | -        |
+| Endpoint OS      | Windows Server 2022 | Monitored target                   | -           | -        |
 
 ---
 
