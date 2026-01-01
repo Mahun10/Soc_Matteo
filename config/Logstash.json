@@ -1,0 +1,49 @@
+input {
+  file {
+    id => "wazuh_alerts"
+    path => "/var/ossec/logs/alerts/alerts.json"
+    start_position => "end"
+    mode => "tail"
+    codec => json
+    sincedb_path => "/dev/null"
+    ecs_compatibility => "disabled"
+  }
+}
+
+filter {
+  date {
+    match => ["timestamp", "ISO8601"]
+    target => "@timestamp"
+    timezone => "Europe/Paris"
+  }
+}
+
+output {
+  opensearch {
+    # OpenSearch endpoint (local lab). Replace with your internal IP / DNS if needed.
+    hosts => ["https://127.0.0.1:9200"]
+
+    # Authentication (do NOT commit real credentials)
+    auth_type => {
+      type => "basic"
+      user => "OPENSEARCH_USERNAME"
+      password => "OPENSEARCH_PASSWORD"
+      # Option (recommended): use env vars instead of hardcoding
+      # user => "${OPENSEARCH_USERNAME}"
+      # password => "${OPENSEARCH_PASSWORD}"
+    }
+
+    # Daily index pattern
+    index => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
+
+    # TLS settings
+    ssl => true
+    cacert => "/etc/opensearch/root-ca.pem"
+
+    # Index template
+    template => "/etc/logstash/templates/wazuh.json"
+    template_name => "wazuh"
+    template_overwrite => true
+    legacy_template => false
+  }
+}
