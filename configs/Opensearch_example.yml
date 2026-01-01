@@ -1,0 +1,37 @@
+# OpenSearch Dashboards configuration (sanitized)
+
+# OpenSearch endpoint (internal)
+opensearch.hosts:
+  - "https://OPENSEARCH_HOST:9200"
+
+# TLS settings (lab configuration)
+opensearch.ssl.verificationMode: none
+# Recommended for production:
+# opensearch.ssl.verificationMode: full
+
+# Authentication (DO NOT COMMIT REAL CREDENTIALS)
+opensearch.username: "DASHBOARD_SERVICE_USER"
+opensearch.password: "DASHBOARD_SERVICE_PASSWORD"
+# Recommended (use environment variables):
+# opensearch.username: "${OPENSEARCH_USERNAME}"
+# opensearch.password: "${OPENSEARCH_PASSWORD}"
+
+# Request headers
+opensearch.requestHeadersWhitelist:
+  - authorization
+  - securitytenant
+
+# Multi-tenancy configuration
+opensearch_security.multitenancy.enabled: true
+opensearch_security.multitenancy.tenants.preferred:
+  - Private
+  - Global
+
+# Read-only roles
+opensearch_security.readonly_mode.roles:
+  - kibana_read_only
+
+# Cookie security (HTTP lab setup)
+opensearch_security.cookie.secure: false
+# Recommended for production (HTTPS):
+# opensearch_security.cookie.secure: true
