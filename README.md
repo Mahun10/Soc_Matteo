@@ -143,6 +143,7 @@ net localgroup Administrateurs test_soc /add
 This step illustrates a persistence and privilege escalation technique.
 
 ![Privilege Escalation Detection](screen/AlertGroupAdmin.png)
+![Privilege Escalation Detection](screen/CommandAddGroup.png)
 
 ---
 
