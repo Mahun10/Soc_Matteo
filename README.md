@@ -33,7 +33,7 @@ The infrastructure is built as a multi-stage data pipeline designed for real-tim
 
 The management stack ensures seamless communication between the detection engine and the storage layer.
 
-* **Logstash Integration**: Configured with a dedicated pipeline (`logstash.yml`) to ingest Wazuh alerts and output them to the OpenSearch cluster.
+* **Logstash Integration**: Configured with a dedicated pipeline (`logstash.conf`) to ingest Wazuh alerts and output them to the OpenSearch cluster.
 * **Storage Layer**: OpenSearch is configured to index security alerts and maintain agent status information.
 * **Dashboard Access**: The dashboard is configured to communicate with the Indexer via internal credentials defined in the configuration files. It is accessible on port **5601** over **HTTP**.
 
