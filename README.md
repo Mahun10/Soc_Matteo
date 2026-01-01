@@ -1,7 +1,7 @@
 
 ---
 
-# SOC Infrastructure Implementation: Wazuh, Indexer, and Logstash Pipeline
+# SOC Infrastructure Implementation: Wazuh, Opensearch, and Logstash Pipeline
 
 ## Project Overview
 
