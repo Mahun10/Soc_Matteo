@@ -54,9 +54,9 @@ All other ports remain closed to minimize the attack surface.
 * **Monitoring Scope**: Real-time tracking of Windows Event Logs (System, Security, Application) and File Integrity Monitoring (FIM) for critical system directories.
 * 
 
-
----
 ![Diagram](diagram-Architecture-Soc.png)
+---
+
 
 # Attack Scenario & Detection Workflow
 
