@@ -74,7 +74,7 @@ net localgroup Administrateurs test_soc /add
 
 This step illustrates a persistence and privilege escalation technique.
 
-![Privilege Escalation Detection](screen/Capture d'écran 2025-12-31 202531.png)
+![Privilege Escalation Detection](screen/CommandeGroupAdd.png)
 
 ---
 
