@@ -13,6 +13,7 @@ The attack was simulated from a Kali Linux machine targeting a Windows host moni
 
 The following phases were observed and detected.
 
+
 ---
 
 ## 1. Initial Access – Authentication Failures
