@@ -1,0 +1,20 @@
+# Wazuh / OpenSearch Dashboard configuration (sanitized)
+
+# Dashboard binding 
+server.host: "0.0.0.0"
+
+# OpenSearch endpoint (internal)
+opensearch.hosts:
+  - "https://OPENSEARCH_HOST:9200"
+
+# Authentication (DO NOT COMMIT REAL CREDENTIALS)
+opensearch.username: "OPENSEARCH_USERNAME"
+opensearch.password: "OPENSEARCH_PASSWORD"
+# Recommended (use environment variables instead)
+# opensearch.username: "${OPENSEARCH_USERNAME}"
+# opensearch.password: "${OPENSEARCH_PASSWORD}"
+
+# TLS settings
+opensearch.ssl.verificationMode: none
+# In production, prefer:
+# opensearch.ssl.verificationMode: full
