@@ -7,7 +7,7 @@
 
 This project documents the deployment of a centralized Security Operations Center (SOC) infrastructure. The architecture utilizes a distributed SIEM/XDR model where log collection, processing, and indexing are decoupled to ensure modularity and scalability.
 
-The solution integrates the Wazuh Manager with a Logstash pipeline for data transformation, using OpenSearch (via Wazuh Indexer) as the primary data store.
+The solution integrates the Wazuh Manager with a Logstash pipeline for data transformation, using OpenSearch as the primary data store.
 
 ## System Architecture
 
