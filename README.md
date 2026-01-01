@@ -143,7 +143,6 @@ net localgroup Administrateurs test_soc /add
 This step illustrates a persistence and privilege escalation technique.
 
 ![Privilege Escalation Detection](screen/AlertGroupAdmin.png)
-![Privilege Escalation Detection](screen/CommandAddGroup.png)
 
 ---
 
@@ -210,14 +209,13 @@ This project validates the effectiveness of the Wazuh SIEM in detecting and corr
 ```plaintext
 .
 ├── configs/
-│   ├── wazuh_manager/      # Wazuh Manager settings (ossec.conf)
-│   ├── logstash/           # Logstash pipeline (01-wazuh.conf)
+│   ├── logstash/           # Logstash pipeline (logstash.conf)
 │   ├── opensearch/         # OpenSearch communication settings
 │   └── wazuh_dashboard/    # Dashboard connection & credentials config
 ├── screen/
-│   └── report_soc.pdf      # Technical documentation in LaTeX format
-├── images/                 # Architecture diagrams and dashboard captures
-└── README.md               # Project documentation
+│   └── report_soc.pdf      # Technical documentation in LaTeX format 
+├── Diagram/                 # Architecture diagrams and Attacker Overview 
+└── README.md                # Project documentation
 
 ```
 
