@@ -39,6 +39,7 @@ After multiple failed attempts within a short time window, Wazuh successfully tr
 
 This demonstrates the SIEM’s ability to correlate raw events into meaningful security alerts.
 
+![Failure Authentification Detection](screen/AlertBruteForce.png)
 
 ---
 
@@ -57,7 +58,7 @@ A successful Remote Desktop (RDP) connection was established from the Kali machi
 
 The use of NTLM for RDP access on an administrator account represents a high-risk behavior.
 
-![Privilege Escalation Detection](screen/AlertRDP.png)
+![RDP Detection](screen/DashboardRDP.png)
 
 
 ---
@@ -78,7 +79,7 @@ net localgroup Administrateurs test_soc /add
 
 This step illustrates a persistence and privilege escalation technique.
 
-![Privilege Escalation Detection](screen/CommandeGroupAdd.png)
+![Privilege Escalation Detection](screen/AlertGroupAdmin.png)
 
 ---
 
