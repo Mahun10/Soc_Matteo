@@ -121,6 +121,8 @@ A successful Remote Desktop (RDP) connection was established from the Kali machi
 
 The use of NTLM for RDP access on an administrator account represents a high-risk behavior.
 
+
+
 ![RDP Detection](screen/DashboardRDP.png)
 
 
@@ -212,10 +214,9 @@ This project validates the effectiveness of the Wazuh SIEM in detecting and corr
 │   ├── logstash/           # Logstash pipeline (logstash.conf)
 │   ├── opensearch/         # OpenSearch communication settings
 │   └── wazuh_dashboard/    # Dashboard connection & credentials config
-├── screen/
-│   └── report_soc.pdf      # Technical documentation in LaTeX format 
-├── Diagram/                 # Architecture diagrams and Attacker Overview 
-└── README.md                # Project documentation
+├── screen/                 # Captures
+├── Diagram/                # Architecture diagrams and Attacker Overview 
+└── README.md               # Project documentation
 
 ```
 
