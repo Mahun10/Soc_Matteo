@@ -54,7 +54,7 @@ All other ports remain closed to minimize the attack surface.
 * **Monitoring Scope**: Real-time tracking of Windows Event Logs (System, Security, Application) and File Integrity Monitoring (FIM) for critical system directories.
 * 
 
-![Diagram](diagram-Architecture-Soc.png)
+![Diagram](Diagram/ArchitectureSIEM.png)
 ---
 
 
@@ -70,7 +70,7 @@ Demonstrates the deployment of a Wazuh SIEM and its ability to detect, correlate
 
 The attack was simulated from a Kali Linux machine targeting a Windows host monitored by a Wazuh agent.
 
-![Diagram](Diagram_Architecture.png)
+![Diagram](Diagram/Attacker.png)
 
 The following phases were observed and detected.
 
