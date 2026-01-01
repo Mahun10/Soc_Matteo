@@ -18,7 +18,7 @@ The infrastructure is built as a multi-stage data pipeline designed for real-tim
 1. **Endpoint (Windows VM)**: The Wazuh Agent collects security events and system telemetry.
 2. **Wazuh Manager (Debian)**: Receives and analyzes events. It generates alerts based on rule matching and decoders.
 3. **Logstash Pipeline**: Acts as the bridge between the Manager and the Indexer. It receives alerts via filebeat or syslog, processes them, and pushes them to the OpenSearch API.
-4. **Wazuh Indexer (OpenSearch)**: Manages data indexing and storage. It receives alert data from Logstash and metadata directly from the management services.
+4. **OpenSearch**: Manages data indexing and storage. It receives alert data from Logstash and metadata directly from the management services.
 5. **Wazuh Dashboard**: A web interface connected to OpenSearch using dedicated credentials. It allows for visualization of security alerts and agent management.
 
 ### Technology Stack
