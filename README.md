@@ -73,9 +73,11 @@ Demonstrates the deployment of a Wazuh SIEM and its ability to detect, correlate
 
 The attack was simulated from a Kali Linux machine targeting a Windows host monitored by a Wazuh agent.
 
+![Diagram](Diagram_Architecture.png)
+
 The following phases were observed and detected.
 
-![Diagram](Diagram_Architecture.png)
+
 
 
 ---
