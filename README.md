@@ -124,6 +124,8 @@ The use of NTLM for RDP access on an administrator account represents a high-ris
 
 
 ![RDP Detection](screen/DashboardRDP.png)
+And
+![RDP Detection](screen/LogonTypeRDP.png)
 
 
 ---
@@ -145,6 +147,9 @@ net localgroup Administrateurs test_soc /add
 This step illustrates a persistence and privilege escalation technique.
 
 ![Privilege Escalation Detection](screen/AlertGroupAdmin.png)
+And
+![Privilege Escalation Detection](screen/PrivilegeEscaladCommand.png)
+
 
 ---
 
