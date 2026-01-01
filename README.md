@@ -88,7 +88,7 @@ Multiple failed authentication attempts were generated against the Windows machi
 - Event ID: 4625  
 - Wazuh rule: `60122`
 
-This behavior is commonly associated with password guessing or brute force attempts.
+This behavior is commonly associated with password guessing or brute force attempts. (see next capture)
 
 ---
 
