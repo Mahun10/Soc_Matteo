@@ -38,6 +38,7 @@ After multiple failed attempts within a short time window, Wazuh successfully tr
 
 This demonstrates the SIEM’s ability to correlate raw events into meaningful security alerts.
 
+
 ---
 
 ## 3. Successful RDP Connection (Lateral Movement)
@@ -72,6 +73,8 @@ net localgroup Administrateurs test_soc /add
 * Wazuh rule detecting administrator group changes
 
 This step illustrates a persistence and privilege escalation technique.
+
+![Privilege Escalation Detection](screen/Capture d'écran 2025-12-31 202531.png)
 
 ---
 
