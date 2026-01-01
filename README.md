@@ -52,9 +52,11 @@ All other ports remain closed to minimize the attack surface.
 
 * **Agent Deployment**: Installed on Windows 10/11, pointing to the Debian Manager's static IP.
 * **Monitoring Scope**: Real-time tracking of Windows Event Logs (System, Security, Application) and File Integrity Monitoring (FIM) for critical system directories.
+* 
+
 
 ---
-
+![Diagram](diagram-Architecture-Soc.png)
 
 # Attack Scenario & Detection Workflow
 
