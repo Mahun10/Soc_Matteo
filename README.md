@@ -18,7 +18,7 @@ The infrastructure is built as a multi-stage data pipeline designed for real-tim
 | Component        | Technology       | Role                                  | Port        | Protocol |
 |------------------|------------------|---------------------------------------|-------------|----------|
 | Endpoint Agent   | Wazuh Agent      | Collects endpoint telemetry and logs  | Outbound to 1514/1515 | TCP |
-| SIEM Engine      | Wazuh Manager    | Threat detection and rule engine      | 1514 / 1515 | TCP      |
+| SIEM Engine      | Wazuh Manager    | Threat detection and rule engine      | 1514 / 1515 | TCP + TLS    |
 | Data Pipeline    | Logstash         | Alert processing and forwarding       | Local       | -        |
 | Search Engine    | OpenSearch       | Data indexing and storage             | 9200        | HTTPS    |
 | Visualization    | Wazuh Dashboard  | Web UI for analytics                  | 5601        | HTTP/HTTPS     |
@@ -54,7 +54,7 @@ All other ports remain closed to minimize the attack surface.
 * **Monitoring Scope**: Real-time tracking of Windows Event Logs (System, Security, Application) and File Integrity Monitoring (FIM) for critical system directories.
 * 
 
-![Diagram](Diagram/ArchitectureSIEM.png)
+![Diagram](Diagram/ArchitectureSIEM2.png)
 ---
 
 
