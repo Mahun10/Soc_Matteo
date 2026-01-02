@@ -1,7 +1,7 @@
 
 ---
 
-# SOC Infrastructure Implementation (Wazuh, Opensearch, and Logstash Pipeline) and Attack detection
+# SOC Infrastructure Implementation (Wazuh, Opensearch, and Logstash Pipeline) and Attacks detection
 
 ## Project Overview
 
